@@ -35,7 +35,7 @@ function rolesClaimsRule(user, context, callback) {
 ```	
 
 add-aoles-ao-asers
-```
+```javascript
 function (user, context, callback) {
   const namespace = 'https://quickstart/';
   const assignedRoles = (context.authorization || {}).roles;
