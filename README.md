@@ -76,7 +76,7 @@ and replace the values within with your own Auth0 application credentials:
 This compiles and serves the Vue app on port 8080, and starts the backend API server on port 8081.
 
 ```
-npm run serve
+npm run dev
 ```
 ## How it works.
 
