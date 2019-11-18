@@ -63,23 +63,18 @@ export default {
   },
   methods: {
     async refreshTodos () {
-      console.log('auth:' + this.$auth)
       let user = this.$auth.user
-      console.log('user:' + Object.keys(user))
-      console.log('user:' + user['https://quickstart/jwt/claims']['roles'])
-      console.log('user:' + (typeof user['https://quickstart/jwt/claims']['roles']))
+      console.log('role:' + user['https://quickstart/jwt/claims']['roles'])
       this.isDirector = ('' + user['https://quickstart/jwt/claims']['roles']) === 'Director'
-      console.log('isDirector:' + this.isDirector)
       this.loading = true
       this.todos = await api.getTodos()
-      console.log(`refreshTodos ${this.todos}`)
       this.loading = false
     },
     async populateTodoToEdit (todo) {
       this.model = Object.assign({}, todo)
     },
     async saveTodo () {
-      console.log(`save ${this.model.title} ${this.model.body}`)
+      console.log(`saveTodo ${this.model.title} ${this.model.body}`)
       if (this.model.id) {
         await api.updateTodo(this.model.id, this.model)
       } else {

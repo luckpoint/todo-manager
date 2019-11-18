@@ -51,21 +51,31 @@ let todoResource = finale.resource({
 })
 
 todoResource.all.auth(function(req, res, context) {
-  return new Promise(function(resolve, reject) {
-    return checkJwt(req, res, function(e) {
-     	let roles = req.user['https://quickstart/roles']
-      console.error(`roles: ${roles}`);
-     	let scopes = req.user['scope']
-      console.error(`scopes: ${scopes}`);
-      let scopeCheck = scopes && scopes.split(' ').includes('todo')
-      if (e || !scopeCheck) {
-        res.status(401).send({message: "Unauthorized"});
-        resolve(context.stop);
-      } else {
-        resolve(context.continue);
-      }
+  if (req.method === "GET") {
+    context.continue()
+    } else {
+      return new Promise(function(resolve, reject) {
+        return checkJwt(req, res, function(e) {
+          let roles = req.user['https://quickstart/roles']
+          console.log(`roles: ${roles}`)
+          if (roles.length > 0 && roles[0] !== "Director") {
+          res.status(401).send({message: "Unauthorized"})
+          resolve(context.stop)
+          return
+        }
+
+        let scopes = req.user['scope']
+        console.log(`scopes: ${scopes}`);
+        let scopeCheck = scopes && scopes.split(' ').includes('todo')
+        if (e || !scopeCheck) {
+          res.status(401).send({message: "Unauthorized"});
+          resolve(context.stop);
+        } else {
+          resolve(context.continue);
+        }
+      })
     })
-  })
+  }
 })
 
 database
