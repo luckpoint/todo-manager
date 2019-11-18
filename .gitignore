@@ -7,6 +7,8 @@ yarn-error.log*
 /test/unit/coverage
 /test/e2e/reports
 selenium-debug.log
+auth_config.json
+todo.sqlite
 
 # Editor directories and files
 .idea
