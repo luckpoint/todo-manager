@@ -35,7 +35,7 @@ function rolesClaimsRule(user, context, callback) {
 ```	
 
 add-aoles-ao-asers
-```
+```javascript
 function (user, context, callback) {
   const namespace = 'https://quickstart/';
   const assignedRoles = (context.authorization || {}).roles;
@@ -63,11 +63,13 @@ The project needs to be configured with your Auth0 domain and client ID in order
 To do this, first copy auth_config.sample.json into a new file in the same folder called auth_config.json,
 and replace the values within with your own Auth0 application credentials:
 
+```
 {
   "domain": "<YOUR AUTH0 DOMAIN>",
   "audience": "<YOUR AUTH0 API IDENTIFIER>",
   "clientId": "<YOUR AUTH0 CLIENT ID>"
 }
+```
 
 ### Running in development
 
